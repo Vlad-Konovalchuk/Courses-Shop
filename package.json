@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start:dev": "nodemon index.js",
-    "db:start": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    "setup:db": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
