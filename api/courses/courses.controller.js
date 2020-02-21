@@ -1,8 +1,8 @@
+const _ = require("lodash");
 const coursesRepository = require("./courses.repository");
 const categoryModel = require("../../models").Category;
 const categoryRepository = require("../categories/categories.repositories");
 const courseModel = require("../../models").Course;
-const _ = require("lodash");
 const { ErrorHandler } = require("../../utils/errorHandlingHelper");
 
 exports.getAllUsers = async (req, res) => {
@@ -33,9 +33,7 @@ exports.createCourse = async (req, res) => {
     const isCourseExist = await courseModel.findOne({
       where: { title: newCourse.title }
     });
-    console.log("FUCK", isCourseExist);
     if (isCourseExist) {
-      console.log("FUCK");
       throw new ErrorHandler(401, "Category already exist");
     }
     const course = await courseModel.create(newCourse);
@@ -62,6 +60,7 @@ exports.createCourse = async (req, res) => {
     throw new ErrorHandler(404, error);
   }
 };
+
 exports.getAllCourses = async (req, res) => {
   try {
     const data = await courseModel.findAll({
@@ -85,6 +84,7 @@ exports.getAllCourses = async (req, res) => {
     throw new ErrorHandler(404, error);
   }
 };
+
 exports.addCategories = async (req, res) => {
   let requestCategories = _.pick(req.body, ["categories"]).categories;
   const categories = await categoryRepository.findOrCreate(requestCategories);
