@@ -13,6 +13,7 @@ module.exports = (req, res, next) => {
   let token = req.headers["x-access-token"] || req.headers["authorization"];
   if (token.startsWith("Bearer ")) {
     /* Remove Bearer from string */
+    console.log("FUCKUP");
     token = token.slice(7, token.length);
   }
   if (!token) {
@@ -25,7 +26,9 @@ module.exports = (req, res, next) => {
   }
   let userData = verifyToken(token);
   if (userData.exp <= Date.now()) {
-    res.end('Access token has expired', 400);
+    res.status(400).json({
+      message: "Access token has expired"
+    });
   }
   if (userData) {
     req.userData = {

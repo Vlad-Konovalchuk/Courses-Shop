@@ -1,11 +1,11 @@
-FROM node:9
+FROM node:10.15.0-alpine
 
-WORKDIR /app
+WORKDIR /home/app
 
-COPY package.json .
-RUN npm install
+COPY package.json /home/app/
+COPY package-lock.json /home/app/
 
-COPY . .
+COPY . /home/app
 
 USER node
 EXPOSE 3000
